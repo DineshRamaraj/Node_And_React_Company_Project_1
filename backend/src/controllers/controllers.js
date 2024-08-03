@@ -14,18 +14,18 @@ const registerUser = async (req, res, next) => {
     res.json({ message: "User already exists" });
     return;
   }
-  // console.log(1);
+  console.log(1);
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    // console.log(2);
+    console.log(2);
 
     await User.create({
-      username,
-      email,
+      username: username,
+      email: email,
       mobileNumber: Number(mobilenumber),
       password: hashedPassword,
     });
-    // console.log(3);
+    console.log(3);
 
     res.status(201);
     res.json({ message: "Inserted Successfully..." });
@@ -41,6 +41,10 @@ const loginUser = async (req, res) => {
     // console.log("This is DB message. It is working");
     const user = await User.findOne({ email: email });
     // console.log(user);
+    if(user === null){
+      res.status(404);
+      res.json({error_msg: "User not found"});
+    }
     const isPasswordMatched = await bcrypt.compare(password, user.password);
     // console.log(isPasswordMatched);
     if (isPasswordMatched === true) {
@@ -62,15 +66,41 @@ const loginUser = async (req, res) => {
   }
 };
 
+// const authenticateToken = (request, response, next) => {
+//   console.log("Authenticate Token");
+//   let jwtToken;
+
+//   console.log(request.headers);
+//   const authHeader = request.headers["Authorization"];
+//   console.log(authHeader);
+//   if (authHeader !== undefined) {
+//     jwtToken = authHeader.split(" ")[1];
+//   }
+//   if (jwtToken === undefined) {
+//     response.status(401);
+//     response.send("Invalid Access Token");
+//   } else {
+//     jwt.verify(jwtToken, "MY_SECRET_KEY", async (error, payload) => {
+//       if (error) {
+//         response.send("Invalid Access Token");
+//       } else {
+//         // console.log(payload);
+//         request.username = payload.username;
+//         next();
+//       }
+//     });
+//   }
+// };
+
 // Add Todo Item
 
 const addTodoItem = async (req, res) => {
   const { user_id } = req.params;
   const { description, status } = req.body;
   try {
-    if(!description || !status){
+    if (!description || !status) {
       res.status(404);
-      res.json({error_msg: "Fill the Both Fields"});
+      res.json({ error_msg: "Fill the Both Fields" });
       return;
     }
 

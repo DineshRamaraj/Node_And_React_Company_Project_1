@@ -13,7 +13,7 @@ const Login = () => {
   const submitForm = async (event) => {
     event.preventDefault();
 
-    const apiUrl = "http://localhost:5000/login";
+    const apiUrl = "http://localhost:5000/api/login";
     const userDetails = {
       email: emailInput,
       password: passwordInput,
