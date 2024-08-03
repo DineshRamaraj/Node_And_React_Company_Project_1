@@ -1,0 +1,113 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 20px;
+}
+
+.register-heading{
+  font-size: 24px;
+  font-family: "Roboto";
+  color: rgb(75, 93, 231);
+  margin-bottom: 20px;
+}
+
+.register-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.register-name-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.register-email-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.register-mobile-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.register-password-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.register-con-password-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.register-input {
+  padding: 10px 20px;
+  border: 1px solid #d7dfe9;
+  border-radius: 6px;
+  color: #263868;
+  font-size: 14px;
+  font-family: "Roboto";
+  outline: none;
+}
+
+.register-label {
+  color: #7e858e;
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.register-button {
+  font-size: 16px;
+  font-family: "Roboto";
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #263868;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 14px;
+  font-family: "Roboto";
+}
+
+
+.register-checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.register-checkbox {
+  width: 14px;
+  height: 14px;
+  color: #d7dfe9;
+  margin-right: 10px;
+}
+
+.register-checkbox-label {
+  font-size: 14px;
+  font-family: 'Roboto';
+  color: #000000;
+}

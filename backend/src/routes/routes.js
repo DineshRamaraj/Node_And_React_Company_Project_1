@@ -10,10 +10,10 @@ const {
 const router = express.Router();
 
 router.post("/register", registerUser);
-router.get("/login", loginUser);
+router.post("/login", loginUser);
 router.post("/user/:user_id/todos", addTodoItem);
 router.get("/user/:user_id/todos", getTodoItem);
-router.put("/user/:user_id/todos", updateTodoItem);
-router.delete("/user/:user_id/todos", deleteTodoItem);
+router.put("/user/:user_id/todos/:id", updateTodoItem);
+router.delete("/user/:user_id/todos/:id", deleteTodoItem);
 
 module.exports = router;

@@ -1,0 +1,218 @@
+.home-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    padding: 10px;
+}
+
+@media screen and (min-width: 768px){
+    .home-container{
+        padding: 30px 0 30px;
+    }
+}
+
+.home-heading{
+    font-family: "Roboto";
+    font-size: 24px;
+    color: rgb(75, 93, 231);
+}
+
+.todo-container{
+    display: flex; 
+    flex-direction: column;
+    min-width: 250px;
+    width: 100%;
+    /* border: 1px solid red; */
+    margin: 0 20px;
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 576px) {
+    .todo-container{
+        min-width: 500px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .todo-container{
+        max-width: 800px;
+    }
+}
+
+.add-todo-container{
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 10px 0;
+    /* border: 1px solid green; */
+
+}
+
+@media  screen and (min-width: 578px){
+    .add-todo-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+    }
+}
+
+/* @media  screen and (min-width: 768px){
+    .add-todo-container{
+        display: grid;
+        grid-template-columns: 1fr ;
+    }
+} */
+
+.todo-description{
+    padding: 8px 10px;
+    outline: none;
+    font-family: "Roboto";
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid rgb(174, 166, 166);
+}
+
+@media screen and (min-width: 578px){
+    .todo-description{
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+}
+
+.todo-status{
+    padding: 8px 10px;
+    outline: none;
+    font-family: "Roboto";
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid rgb(174, 166, 166);
+}
+
+@media screen and (min-width: 578px){
+    .todo-status{
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+}
+
+.todo-addbutton-container{
+    text-align: center;
+}
+
+.todo-addbutton{
+    padding: 8px 10px;
+}
+
+.todo-list-item-heading{
+    font-size: 24px;
+    font-family: "Roboto";
+    margin-top: 20px;
+    font-weight: 100;
+}
+
+.todo-list-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: space-between;
+    list-style-type: none;
+    padding-left: 0;
+    padding: 20px 0px 10px;
+    width:100%;
+}
+
+@media screen and (min-width: 578px) {
+    .todo-list-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/* 
+@media screen and (min-width: 768px) {
+    .todo-list-container{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+} */
+
+.todo-list-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px 10px 10px;
+    box-shadow: 5px 5px 5px 0 lightblue;
+}
+
+.todo-list-item-element{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: transparent;
+}
+
+.each-todo-description{
+    font-family: "Roboto";
+    font-size: 22px;
+}
+
+.todo-list-item-status-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo-list-status-icon{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.each-todo-status{
+    font-family: "Roboto";
+    font-size: 16px;
+    margin:0;
+}
+
+.todo-list-update-delete-button-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.todo-list-update-button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.todo-list-update-icon{
+    color: rgb(7, 176, 7);
+    font-size: 24px;
+}
+
+.todo-list-delete-button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.todo-list-delete-icon{
+    color: rgb(235, 82, 82);
+    font-size: 24px;
+}
+
+.loader-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+}

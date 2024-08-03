@@ -3,34 +3,42 @@ const jwt = require("jsonwebtoken");
 const { User, Todo } = require("../models/models");
 
 const registerUser = async (req, res, next) => {
-  const { username, email, mobileNumber, password } = req.body;
-
+  const { username, email, mobilenumber, password } = req.body;
+  // console.log("enter register DB");
+  // console.log(req.body);
   const selectUser = await User.findOne({ email: email });
-  //   console.log(selectUser);
+  // console.log(selectUser);
 
-  if (selectUser) {
-    return res.status(409).json({ message: "User already exists" });
+  if (selectUser !== null) {
+    res.status(409);
+    res.json({ message: "User already exists" });
+    return;
   }
-
+  // console.log(1);
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
+    // console.log(2);
 
-    const result = await User.create({
-      username: username,
-      email: email,
-      mobileNumber: Number(mobileNumber),
+    await User.create({
+      username,
+      email,
+      mobileNumber: Number(mobilenumber),
       password: hashedPassword,
     });
+    // console.log(3);
 
-    res.status(201).json({ message: "Inserted Successfully...", data: result });
+    res.status(201);
+    res.json({ message: "Inserted Successfully..." });
   } catch (err) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500);
+    res.json({ message: "Internal Server Error" });
   }
 };
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
+    // console.log("This is DB message. It is working");
     const user = await User.findOne({ email: email });
     // console.log(user);
     const isPasswordMatched = await bcrypt.compare(password, user.password);
@@ -39,20 +47,33 @@ const loginUser = async (req, res) => {
       const payload = { username: user.username };
       const jwtToken = jwt.sign(payload, "MY_SECRET_KEY");
       res.status(200);
-      res.send({ jwtToken, message: "Login Successfully..." });
+      res.json({
+        jwt_token: jwtToken,
+        user_id: user._id,
+        message: "Login Successfully...",
+      });
+    } else {
+      res.status(404);
+      res.json({ error_msg: "Invalid Password" });
     }
   } catch (err) {
     res.status(500);
-    res.json({ message: "Internal Server Error" });
+    res.json({ error_msg: "Internal Server Error" });
   }
 };
 
 // Add Todo Item
 
 const addTodoItem = async (req, res) => {
-    const { user_id} = req.params;
-  const {description, status } = req.body;
+  const { user_id } = req.params;
+  const { description, status } = req.body;
   try {
+    if(!description || !status){
+      res.status(404);
+      res.json({error_msg: "Fill the Both Fields"});
+      return;
+    }
+
     await Todo.create({
       user_id: user_id,
       description: description,
@@ -70,21 +91,22 @@ const addTodoItem = async (req, res) => {
 
 const getTodoItem = async (req, res) => {
   const { user_id } = req.params;
+  // console.log(user_id);
   try {
     const todoList = await Todo.find({ user_id: user_id });
     res.status(200);
-    res.json({ data: todoList });
+    res.json({ todo_list: todoList });
   } catch (err) {
     res.status(500);
-    res.json({ message: "Internal Server Error" });
+    res.json({ error_msg: "Internal Server Error" });
   }
 };
 
 // Updated Todo Item
 
 const updateTodoItem = async (req, res) => {
-  const { user_id } = req.params;
-  const { id, description, status } = req.body;
+  const { user_id, id } = req.params;
+  const { description, status } = req.body;
   try {
     const checkItem = await Todo.findOne({ _id: id, user_id: user_id });
     if (!checkItem) {
@@ -92,11 +114,24 @@ const updateTodoItem = async (req, res) => {
       return res.json({ message: "Invalid Todo Item" });
     }
 
-    const updateItem = await Todo.updateOne({
-      _id: id,
-      description: description || selectedItem.description,
-      status: status || selectedItem.status,
-    });
+    const updateFields = {};
+    if (description) updateFields.description = description;
+    if (status) updateFields.status = status;
+
+    const updateItem = await Todo.updateOne(
+      { _id: id, user_id: user_id },
+      {
+        $set: {
+          description: description || checkItem.description,
+          status: status || checkItem.status,
+        },
+      }
+    );
+
+    if (updateItem.nModified === 0) {
+      return res.status(400).json({ message: "No changes made to the item" });
+    }
+
     res.status(200);
     res.json({ message: "Updated Successfully", data: updateItem });
   } catch (err) {
@@ -108,10 +143,11 @@ const updateTodoItem = async (req, res) => {
 // Delete Todo Item
 
 const deleteTodoItem = async (req, res) => {
-  const { user_id } = req.params;
-  const { id } = req.body;
+  const { user_id, id } = req.params;
+  // console.log(req.params);
   try {
     const checkItem = await Todo.findOne({ _id: id, user_id: user_id });
+    // console.log(checkItem);
     if (!checkItem) {
       res.status(404);
       res.send({ message: "Not Found" });
