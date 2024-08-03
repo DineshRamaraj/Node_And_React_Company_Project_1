@@ -43,7 +43,7 @@ const Register = () => {
       return;
     }
 
-    const apiUrl = "http://localhost:5000/api/register";
+    const apiUrl = "https://todo-list-api-xast.onrender.com/api/register";
     const userDetails = {
       username: formData.username,
       email: formData.email,

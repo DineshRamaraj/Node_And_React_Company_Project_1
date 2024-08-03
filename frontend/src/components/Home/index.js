@@ -35,7 +35,7 @@ const Home = () => {
 
   const getTodoList = useCallback(async () => {
     setApiStatus(apiStatusConstants.in_progress);
-    const response = await fetch(`http://localhost:5000/api/user/${user_id}/todos`);
+    const response = await fetch(`https://todo-list-api-xast.onrender.com/api/user/${user_id}/todos`);
     const data = await response.json();
     const updatedData = data.todo_list.map((eachItem) => ({
       description: eachItem.description,
@@ -78,8 +78,8 @@ const Home = () => {
     };
 
     const apiUrl = isUpdate
-      ? `http://localhost:5000/api/user/${user_id}/todos/${updateTodoId}`
-      : `http://localhost:5000/api/user/${user_id}/todos`;
+      ? `https://todo-list-api-xast.onrender.com/api/user/${user_id}/todos/${updateTodoId}`
+      : `https://todo-list-api-xast.onrender.com/api/user/${user_id}/todos`;
 
     const options = {
       method: isUpdate ? "PUT" : "POST",
@@ -107,7 +107,7 @@ const Home = () => {
   };
 
   const clickDeleteTodo = async (id) => {
-    const apiUrl = `http://localhost:5000/api/user/${user_id}/todos/${id}`;
+    const apiUrl = `https://todo-list-api-xast.onrender.com/api/user/${user_id}/todos/${id}`;
     const options = {
       method: "DELETE",
       headers: {
