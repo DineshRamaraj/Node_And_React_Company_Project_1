@@ -71,7 +71,7 @@ const loginUser = async (req, res) => {
 //   let jwtToken;
 
 //   console.log(request.headers);
-//   const authHeader = request.headers["Authorization"];
+//   const authHeader = request.headers["authorization"];
 //   console.log(authHeader);
 //   if (authHeader !== undefined) {
 //     jwtToken = authHeader.split(" ")[1];
